@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -14,13 +16,22 @@
 }
 
 .form {
-  background-color: beige;
+  background-color: lightgoldenrodyellow;
 }
 
 .container {
-  border: 2px solid cadetblue;
+  border: 2px solid black;
+  background: lightsteelblue;
+}
+.image {
+  border: 2px solid black;
 }
 
-.map {
-  border: 2px solid cadetblue;
+.forecast {
+  background: lightskyblue;
+  border: 2px solid black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  margin-right: 5px;
 }
