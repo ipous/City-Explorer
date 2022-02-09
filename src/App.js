@@ -1,13 +1,12 @@
-
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import  Container from 'react-bootstrap/Container';
+import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
-import Weather from './weather';
-class App extends React.Component {
+import Weather from './Weather';
 
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,21 +18,20 @@ class App extends React.Component {
     };
   }
 
-
-
-  handleChange = (event) => {
+   handleChange = (event) => {
     let typedCity = event.target.value;
     this.setState({ city: typedCity });
     console.log(typedCity);
   };
+  
   getLocation = async (event) => {
     event.preventDefault();
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`;
-    console.log('URL:', url)
+    console.log('URL:', url);
     try {
-    let response = await axios.get(url);
-    console.log('Response:', response.data[0]);
-    this.setState({
+      let response = await axios.get(url);
+      console.log('Response: ', response.data[0]);
+      this.setState({
       locationObj: response.data[0]
     });
     this.getWeather();
@@ -43,8 +41,8 @@ class App extends React.Component {
       errorMessage: error.response.status + ': ' + error.response.data.error
     })
   }
+ }
 
-  }
 getWeather = async () => {
   const url = `http://localhost:3001/weather?lat=${this.state.locationObj.lat}&lon=${this.state.locationObj.lon}&searchQuery=${this.state.city}`
   try {
@@ -54,16 +52,12 @@ getWeather = async () => {
       weatherArr: response.data
     });
   } catch(error) {
-   // let errorResponse - await axios.get(url);
-this.setState({
+  this.setState({
   showError: true,
-  errorMessage: 'something went wrong'
-})
-    
+  errorMessage: 'City Unavailable'
+    })   
   }
 }
-
-
 
   render() {
     return (
